@@ -18,8 +18,54 @@ button {
   font-weight: bold;
 }
 
-.sign-out{
+.sign-out {
   display: flex;
-  margin:20px;
+  margin: 20px;
   justify-content: space-between;
+}
+
+/**/
+.container {
+  margin: 50px;
+}
+
+ul {
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 1rem;
+}
+
+ul li {
+  display: grid;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info a {
+  display: block;
+  padding: 10px;
+  color: #fff;
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info span {
+  padding: 10px;
+  display: block;
+}
+
+.paging {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.paging a {
+  display: inline-block;
+  margin-bottom: 20px;
 }

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import "./App.css";
-import Login from "./Login";
-import Monitor from "./Monitor";
+import { Login, Monitor, List } from "./components/";
 import firebase from "firebase";
+import "./App.css";
 
 var config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -34,7 +33,12 @@ class App extends Component {
           onAuthStateChanged={this.onAuthStateChanged}
           isSignedIn={isSignedIn}
         />
-        {isSignedIn ? <Monitor firebase={firebase} /> : null}
+        {isSignedIn ? (
+          <React.Fragment>
+            <Monitor firebase={firebase} />
+            <List firebase={firebase} />
+          </React.Fragment>
+        ) : null}
       </div>
     );
   }

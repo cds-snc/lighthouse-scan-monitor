@@ -32,7 +32,6 @@ class Monitor extends Component {
           <div>Latest Scan:</div>
           <div className="url">{url}</div>
           <img alt="screen" src={src} />
-          
         </div>
       </div>
     );
