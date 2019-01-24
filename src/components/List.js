@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { ListItem, Paging } from "./";
+import { ListItem, Paging, Spinner } from "./";
 import { paginate, getData } from "../util/";
+import scrollToComponent from "react-scroll-to-component";
 class List extends Component {
-  state = { snapshot: null, next: null };
+  state = { snapshot: null, next: null, loading: false };
 
   constructor(props) {
     super(props);
@@ -12,9 +13,21 @@ class List extends Component {
   getPage = async () => {
     const { firebase } = this.props;
     const { next } = this.state;
+
+    if (next) {
+      this.setState({ loading: true });
+    }
+
     try {
       const { snapshot, next: nextQuery } = await paginate(firebase, next);
-      this.setState({ snapshot, next: nextQuery });
+      this.setState({ snapshot, next: nextQuery, loading: false }, () => {
+        scrollToComponent(this.listRef.current, {
+          offset: -100,
+          align: "top",
+          duration: 200,
+          ease: "inOutCirc"
+        });
+      });
     } catch (e) {
       console.log(e);
     }
@@ -25,15 +38,25 @@ class List extends Component {
   }
 
   mapItems() {
-    const { snapshot } = this.state;
+    const { snapshot, loading } = this.state;
+
     const divs = snapshot.docs.map(item => {
-      const { url, src, time } = getData(item);
-      return <ListItem key={url} url={url} src={src} time={time} />;
+      const { url, src, time, updatedAt } = getData(item);
+      return (
+        <ListItem
+          updatedAt={updatedAt}
+          key={url}
+          url={url}
+          src={src}
+          time={time}
+        />
+      );
     });
 
     return (
       <div className="container">
-        <ul ref={this.listRef}>{divs}</ul>
+        <div ref={this.listRef}>Recent Scans:</div>
+        <ul>{loading ? <Spinner /> : divs}</ul>
         <Paging getPage={this.getPage} listRef={this.listRef} />
       </div>
     );

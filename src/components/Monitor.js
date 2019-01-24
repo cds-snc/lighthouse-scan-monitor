@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import { Spinner } from "./";
+import { format } from "date-fns";
+
+const formattedDate = date => {
+  return format(date, "MM/DD/YYYY");
+};
+
 class Monitor extends Component {
-  state = { scr: "" };
+  state = { url: "", src: "" };
   async componentDidMount() {
     const { firebase } = this.props;
-    let db = firebase.firestore();
-
+    const db = firebase.firestore();
     const reposRef = db.collection("scans");
 
     try {
@@ -17,23 +23,32 @@ class Monitor extends Component {
         const data = result.docs[0].data();
         const src = data.data.audits["final-screenshot"].details.data;
         const url = data.url;
-        this.setState({ src, url });
+        const updatedAt = data.updatedAt;
+        this.setState({ src, url, updatedAt });
       });
     } catch (e) {
       console.log(e);
     }
   }
 
-  render() {
-    const { src, url } = this.state;
+  outputHolder() {
+    const { url, src, updatedAt } = this.state;
     return (
-      <div className="site-display">
-        <div className="holder">
-          <div>Latest Scan:</div>
-          <div className="url">{url}</div>
-          <img alt="screen" src={src} />
-        </div>
+      <div className="holder">
+        <div>Latest Scan:</div>
+        {formattedDate(updatedAt)}
+        <div className="url">{url}</div>
+        <img alt="screen" src={src} />
       </div>
+    );
+  }
+
+  render() {
+    const { src } = this.state;
+    return src ? (
+      <div className="site-display">{this.outputHolder()}</div>
+    ) : (
+      <Spinner />
     );
   }
 }

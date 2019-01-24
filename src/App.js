@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { Login, Monitor, List } from "./components/";
+import React, { Component, lazy } from "react";
+import { Login, List, Spinner } from "./components/";
 import firebase from "firebase";
 import "./App.css";
 
-var config = {
+const Monitor = lazy(() => import("./components/Monitor"));
+const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "lighthouse-scanner.firebaseapp.com",
   databaseURL: "https://lighthouse-scanner.firebaseio.com",
@@ -35,7 +36,9 @@ class App extends Component {
         />
         {isSignedIn ? (
           <React.Fragment>
-            <Monitor firebase={firebase} />
+            <React.Suspense fallback={<Spinner />}>
+              <Monitor firebase={firebase} />
+            </React.Suspense>
             <List firebase={firebase} />
           </React.Fragment>
         ) : null}

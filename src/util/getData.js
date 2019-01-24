@@ -3,5 +3,6 @@ export const getData = item => {
   const url = data.url;
   const src = data.data.audits["final-screenshot"].details.data;
   const time = data.data.audits.interactive.rawValue;
-  return { url, src, time };
+  const updatedAt = data.updatedAt;
+  return { url, src, time, updatedAt };
 };
