@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { ListItem, Paging } from "./";
 import { paginate, getData } from "../util/";
-
 class List extends Component {
   state = { snapshot: null, next: null };
 
