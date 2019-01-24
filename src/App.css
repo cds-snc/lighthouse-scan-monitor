@@ -2,12 +2,6 @@
   text-align: center;
 }
 
-button {
-  padding: 2px 10px;
-  font-size: 0.8em;
-  height: 30px;
-}
-
 .holder div {
   padding-bottom: 10px;
 }
@@ -24,23 +18,28 @@ button {
   justify-content: space-between;
 }
 
-/**/
 .container {
   margin: 50px;
 }
 
-ul {
+.container button {
+  padding: 2px 10px;
+  font-size: 0.8em;
+  height: 30px;
+}
+
+.container ul {
   display: grid;
   padding: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-gap: 1rem;
 }
 
-ul li {
+.container ul li {
   display: grid;
 }
 
-.list{
+.list {
   min-height: 600px;
 }
 

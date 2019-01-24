@@ -1,4 +1,4 @@
-export const paginate = async (firebase, nextPage = false, limit = 100) => {
+export const paginate = async (firebase, nextPage = false, limit = 20) => {
   const db = firebase.firestore();
 
   const baseQuery = db
