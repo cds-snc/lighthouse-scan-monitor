@@ -3,7 +3,7 @@ export const paginate = async (firebase, nextPage = false, limit = 20) => {
 
   const baseQuery = db
     .collection("scans")
-    .where("data.runtimeError.code", "==", "NO_ERROR")
+    //.where("data.runtimeError.code", "==", "NO_ERROR")
     .orderBy("updatedAt", "desc");
 
   const query = nextPage ? nextPage : baseQuery.limit(limit);

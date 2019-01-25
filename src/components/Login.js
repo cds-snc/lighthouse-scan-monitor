@@ -1,5 +1,9 @@
 // Import FirebaseAuth and firebase.
 import React from "react";
+import 'firebase/auth';
+
+//const googleProvider = new firebase.auth.GoogleAuthProvider();
+
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 export default class Login extends React.Component {

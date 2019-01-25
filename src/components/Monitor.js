@@ -15,7 +15,7 @@ class Monitor extends Component {
 
     try {
       const query = reposRef
-        .where("data.runtimeError.code", "==", "NO_ERROR")
+        //.where("data.runtimeError.code", "==", "NO_ERROR")
         .orderBy("updatedAt", "desc")
         .limit(1);
 
