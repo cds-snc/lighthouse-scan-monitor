@@ -39,7 +39,6 @@ export default class Login extends React.Component {
     if (!isSignedIn) {
       return (
         <div>
-          <h1>Lighthouse Scanner Monitor</h1>
           <p>Please sign-in:</p>
           <StyledFirebaseAuth
             uiConfig={this.uiConfig}
