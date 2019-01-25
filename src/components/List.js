@@ -10,7 +10,7 @@ class List extends Component {
     this.listRef = React.createRef();
   }
 
-  getPage = async () => {
+  getPage = async (scrollTo = true) => {
     const { firebase } = this.props;
     const { next } = this.state;
 
@@ -21,12 +21,14 @@ class List extends Component {
     try {
       const { snapshot, next: nextQuery } = await paginate(firebase, next);
       this.setState({ snapshot, next: nextQuery, loading: false }, () => {
-        scrollToComponent(this.listRef.current, {
-          offset: -100,
-          align: "top",
-          duration: 200,
-          ease: "inOutCirc"
-        });
+        if (scrollTo) {
+          scrollToComponent(this.listRef.current, {
+            offset: -100,
+            align: "top",
+            duration: 200,
+            ease: "inOutCirc"
+          });
+        }
       });
     } catch (e) {
       console.log(e);
@@ -34,7 +36,7 @@ class List extends Component {
   };
 
   async componentDidMount() {
-    this.getPage();
+    this.getPage(false);
   }
 
   mapItems() {
@@ -55,7 +57,9 @@ class List extends Component {
 
     return (
       <div className="container">
-        <div ref={this.listRef}><h2>Recent Scans:</h2></div>
+        <div ref={this.listRef}>
+          <h2>Recent Scans:</h2>
+        </div>
         <ul>{loading ? <Spinner /> : divs}</ul>
         <Paging getPage={this.getPage} listRef={this.listRef} />
       </div>
