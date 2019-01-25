@@ -6,9 +6,11 @@ const Layout = lazy(() => import("./components/Layout"));
 class App extends Component {
   render() {
     return (
-      <React.Suspense fallback={<Spinner />}>
-        <Layout />
-      </React.Suspense>
+      <React.StrictMode>
+        <React.Suspense fallback={<Spinner />}>
+          <Layout />
+        </React.Suspense>
+      </React.StrictMode>
     );
   }
 }

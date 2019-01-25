@@ -14,7 +14,7 @@ const config = {
 
 firebase.initializeApp(config);
 
-export default class Lauout extends Component {
+export default class Layout extends Component {
   // The component's Local state.
   state = {
     isSignedIn: false // Local signed-in state.
