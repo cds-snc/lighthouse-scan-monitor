@@ -55,7 +55,7 @@ class List extends Component {
 
     return (
       <div className="container">
-        <div ref={this.listRef}>Recent Scans:</div>
+        <div ref={this.listRef}><h2>Recent Scans:</h2></div>
         <ul>{loading ? <Spinner /> : divs}</ul>
         <Paging getPage={this.getPage} listRef={this.listRef} />
       </div>

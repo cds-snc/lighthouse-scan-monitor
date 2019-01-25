@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { Spinner } from "./";
-import { format } from "date-fns";
-
-const formattedDate = date => {
-  return format(date, "MM/DD/YYYY");
-};
+import { formattedDate } from "../util";
 
 class Monitor extends Component {
   state = { url: "", src: "" };
@@ -35,8 +31,8 @@ class Monitor extends Component {
     const { url, src, updatedAt } = this.state;
     return (
       <div className="holder">
-        <div>Latest Scan:</div>
-        {formattedDate(updatedAt)}
+        <div><h2>Latest Scan:</h2></div>
+        <div className="muted">{formattedDate(updatedAt)}</div>
         <div className="url">{url}</div>
         <img alt="screen" src={src} />
       </div>

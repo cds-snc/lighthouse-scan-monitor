@@ -1,13 +1,5 @@
 import React from "react";
-import { format } from "date-fns";
-
-const formattedDate = date => {
-  return format(date, "MM/DD/YYYY");
-};
-
-const toSeconds = milliseconds => {
-  return (milliseconds / 1000.0).toFixed(2);
-};
+import { formattedDate, toSeconds } from "../util";
 
 export const ListItem = ({ url, src, time, updatedAt = "" }) => {
   return (
@@ -20,9 +12,9 @@ export const ListItem = ({ url, src, time, updatedAt = "" }) => {
           <a alt={url} href={url}>
             {url}
           </a>
-          <span>{formattedDate(updatedAt)}</span>
+          <span className="muted">{formattedDate(updatedAt)}</span>
           <div>
-            <span>{toSeconds(time)} secs</span>
+            <span className="muted">{toSeconds(time)} secs</span>
           </div>
         </div>
       </div>
